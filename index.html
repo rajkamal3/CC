@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CareCredit</title>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="index.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    </head>
+
+    <body onload="callInit()">
+        <select id="selectId">
+            <option data-name="1">First 10</option>
+            <option data-name="2">First 20</option>
+            <option data-name="3">First 30</option>
+        </select>
+
+        <div class="modal">
+            <div class="modalHolder">
+                <div class="lds-roller">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="fillThis"></div>
+        </div>
+
+        <button class="loadMore" onclick="loadMore()">Load 10 More</button>
+    </body>
+</html>
