@@ -6,21 +6,9 @@ var state = {
     data: null,
     renderedHTML: null,
     loadMore: function () {
-        document.querySelector('.modalHolder').style.display = 'block';
         this.displayRange[0] = this.displayRange[0] + 10;
         this.displayRange[1] = this.displayRange[1] + 10;
-        axios
-            .get(
-                `https://jsonplaceholder.typicode.com/posts?_start=${this.displayRange[0]}&_end=${this.displayRange[1]}`
-            )
-            .then((res) => {
-                var newData = res.data;
-                for (var i = 0; i < this.data.length; i++) {
-                    this.renderer(newData[i]);
-                    // this.renderedHTML.append(newRenderedHTML);
-                }
-                document.querySelector('.modalHolder').style.display = 'none';
-            });
+        this.init();
     },
     renderer: (res) => {
         return `
@@ -30,8 +18,8 @@ var state = {
             </div>
         `;
     },
-    init: async function () {
-        document.querySelector('.modalHolder').style.display = 'block';
+    init: function () {
+        document.querySelector('.modal').style.opacity = '1';
         axios
             .get(
                 `https://jsonplaceholder.typicode.com/posts?_start=${this.displayRange[0]}&_end=${this.displayRange[1]}`
@@ -44,7 +32,7 @@ var state = {
                         '.fillThis'
                     ).innerHTML += this.renderedHTML;
                 }
-                document.querySelector('.modalHolder').style.display = 'none';
+                document.querySelector('.modal').style.opacity = '0';
             });
     }
 };
@@ -55,7 +43,6 @@ function callInit() {
 
 function loadMore() {
     state.loadMore();
-    callInit();
     console.log(state);
 }
 
