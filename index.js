@@ -19,7 +19,7 @@ var state = {
         `;
     },
     init: function () {
-        document.querySelector('.modal').style.opacity = '1';
+        document.querySelector('.modal').style.display = 'block';
         axios
             .get(
                 `https://jsonplaceholder.typicode.com/posts?_start=${this.displayRange[0]}&_end=${this.displayRange[1]}`
@@ -32,7 +32,7 @@ var state = {
                         '.fillThis'
                     ).innerHTML += this.renderedHTML;
                 }
-                document.querySelector('.modal').style.opacity = '0';
+                document.querySelector('.modal').style.display = 'none';
             });
     }
 };
