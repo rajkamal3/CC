@@ -1,5 +1,5 @@
 var state = {
-    sort: 'default',
+    sort: ['asc', 'desc'],
     sortBy: 'date',
     displayRange: [0, 10],
     currentSelection: null,
@@ -19,6 +19,30 @@ var state = {
                 this.renderedHTML = this.renderer(this.data[i]);
                 document.querySelector('.fillThis').innerHTML += this.renderedHTML;
             }
+        });
+    },
+    sortMethod: function () {
+        var sortOrder = document.querySelector('.sort').getAttribute('data-order');
+
+        if (sortOrder === 'asc') {
+            document.querySelector('.sort').setAttribute('data-order', 'desc');
+            document.querySelector('.sort').innerHTML = 'Sort - Descending';
+        } else if (sortOrder === 'desc') {
+            document.querySelector('.sort').setAttribute('data-order', 'asc');
+            document.querySelector('.sort').innerHTML = 'Sort - Ascending';
+        }
+
+        document.querySelector('.modal').style.display = 'block';
+        axios.get(`https://jsonplaceholder.typicode.com/posts?_sort=id&_order=${sortOrder}`).then((res) => {
+            document.querySelector('.fillThis').innerHTML = '';
+            this.data = null;
+            this.renderedHTML = null;
+            this.data = res.data;
+            for (var i = 0; i < this.data.length; i++) {
+                this.renderedHTML = this.renderer(this.data[i]);
+                document.querySelector('.fillThis').innerHTML += this.renderedHTML;
+            }
+            document.querySelector('.modal').style.display = 'none';
         });
     },
     renderer: (res) => {
@@ -53,4 +77,8 @@ function callInit() {
 function loadMore() {
     state.loadMore();
     console.log(state);
+}
+
+function sort() {
+    state.sortMethod();
 }
