@@ -15,6 +15,11 @@ body {
     margin-top: 25vh;
 }
 
+.renderedHTML {
+    border: 3px solid lightgrey;
+    margin-bottom: 3px;
+}
+
 .lds-roller {
     position: fixed;
     width: 80px;

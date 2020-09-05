@@ -1,13 +1,13 @@
 var state = {
     sort: ['asc', 'desc'],
     sortBy: 'date',
-    displayRange: [0, 10],
+    displayRange: [0, 3],
     currentSelection: null,
     data: null,
     renderedHTML: null,
     loadMore: function () {
-        this.displayRange[0] = this.displayRange[0] + 10;
-        this.displayRange[1] = this.displayRange[1] + 10;
+        this.displayRange[0] = this.displayRange[0] + 3;
+        this.displayRange[1] = this.displayRange[1] + 3;
         this.init();
     },
     dropdownSelection: function () {
@@ -21,7 +21,7 @@ var state = {
             }
         });
     },
-    sortMethod: function () {
+    sort: function () {
         var sortOrder = document.querySelector('.sort').getAttribute('data-order');
 
         if (sortOrder === 'asc') {
@@ -47,7 +47,7 @@ var state = {
     },
     renderer: (res) => {
         return `
-            <div style='border: 3px solid lightgrey'>
+            <div class='renderedHTML'>
                 <h4>${res.id}</h4>
                 <p>${res.body}</p>
             </div>
@@ -80,5 +80,5 @@ function loadMore() {
 }
 
 function sort() {
-    state.sortMethod();
+    state.sort();
 }
